@@ -71,14 +71,12 @@ function CompareAnalyzerController() {
 function AnalyzerBoundary({
   children,
   defaultView,
-  fallback,
 }: {
   children: ReactNode
   defaultView: CompareView
-  fallback?: ReactNode
 }) {
   return (
-    <Suspense fallback={fallback ?? <AnalyzerFallback view={defaultView} />}>
+    <Suspense fallback={<AnalyzerFallback view={defaultView} />}>
       {children}
     </Suspense>
   )
@@ -362,7 +360,6 @@ function AnalyzerTopBar({
       compareView={model.compareView}
       onCompareViewChange={model.setCompareView}
       selectedRoute={model.selectedRoute}
-      getRouteHref={model.routeState.getRouteHref}
       setSelectedRoute={model.routeState.setRoute}
       environmentFilter={model.environmentFilter}
       setEnvironmentFilter={model.setEnvironmentFilter}

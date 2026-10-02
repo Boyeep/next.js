@@ -80,10 +80,6 @@ export function useAnalyzerRoute(
     setView: (view: CompareView) => navigate(pathname, { view }, 'replace'),
     setRoute: (route: string | null) =>
       navigate(pathname, { route }, 'replace'),
-    getRouteHref:
-      pathname === '/'
-        ? (route: string) => buildHref('/analyze', { route })
-        : undefined,
     getBaselineHref:
       pathname === '/compare'
         ? undefined

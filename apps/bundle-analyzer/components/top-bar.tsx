@@ -61,7 +61,6 @@ export function ControlDivider() {
 export function TopBar({
   selectedRoute,
   setSelectedRoute,
-  getRouteHref,
   environmentFilter,
   setEnvironmentFilter,
   setSelectedSourceIndex,
@@ -87,7 +86,6 @@ export function TopBar({
   showViewToggle: boolean
   selectedRoute: string | null
   setSelectedRoute: (route: string | null) => void
-  getRouteHref?: (route: string) => string
   environmentFilter: Environment
   setEnvironmentFilter: (env: Environment) => void
   setSelectedSourceIndex: (index: number | null) => void
@@ -108,16 +106,6 @@ export function TopBar({
   routeTotals?: ReadonlyMap<string, RouteSizeTotals> | null
 }) {
   const isCompareMode = baselineSnapshot != null
-  const routeSelection = getRouteHref
-    ? ({ mode: 'link', getRouteHref } as const)
-    : ({
-        mode: 'action',
-        onRouteSelected: (route: string) => {
-          setSelectedRoute(route)
-          setSelectedSourceIndex(null)
-          setFocusedSourceIndex(null)
-        },
-      } as const)
   const baselineSelection = getBaselineHref
     ? ({
         mode: 'link',
@@ -136,7 +124,12 @@ export function TopBar({
       <div className="flex min-w-0 flex-1">
         <RouteTypeahead
           selectedRoute={selectedRoute}
-          {...routeSelection}
+          mode="action"
+          onRouteSelected={(route) => {
+            setSelectedRoute(route)
+            setSelectedSourceIndex(null)
+            setFocusedSourceIndex(null)
+          }}
           routeDiff={isCompareMode ? routeDiff : null}
           routeTotals={routeTotals}
           useCompressed

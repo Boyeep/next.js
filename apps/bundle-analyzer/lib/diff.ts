@@ -117,6 +117,12 @@ export interface RouteSizeTotals {
   compressedSize: number
 }
 
+/**
+ * Totals for the same chunk parts written to a route's `analyze.data`, including
+ * client and server output and traced files. Source maps and trace manifests
+ * are excluded before analysis; the client subtotal covers `[client-fs]` output.
+ * These are whole-route totals, independent of the UI's source filters.
+ */
 export interface RouteSummary {
   route: string
   size: number
