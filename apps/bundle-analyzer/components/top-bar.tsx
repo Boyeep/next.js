@@ -55,10 +55,6 @@ const typeFilterOptions = [
   },
 ]
 
-export function ControlDivider() {
-  return <span className="h-6 w-px bg-muted-foreground/30" />
-}
-
 export function TopBar({
   selectedRoute,
   routePickerOpen,
