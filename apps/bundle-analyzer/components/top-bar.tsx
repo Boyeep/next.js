@@ -60,6 +60,8 @@ export function ControlDivider() {
 
 export function TopBar({
   selectedRoute,
+  routePickerOpen,
+  onRoutePickerOpenChange,
   setSelectedRoute,
   environmentFilter,
   setEnvironmentFilter,
@@ -85,6 +87,8 @@ export function TopBar({
   hasSourceData: boolean
   showViewToggle: boolean
   selectedRoute: string | null
+  routePickerOpen: boolean
+  onRoutePickerOpenChange: (open: boolean) => void
   setSelectedRoute: (route: string | null) => void
   environmentFilter: Environment
   setEnvironmentFilter: (env: Environment) => void
@@ -124,6 +128,8 @@ export function TopBar({
       <div className="flex min-w-0 flex-1">
         <RouteTypeahead
           selectedRoute={selectedRoute}
+          open={routePickerOpen}
+          onOpenChange={onRoutePickerOpenChange}
           mode="action"
           onRouteSelected={(route) => {
             setSelectedRoute(route)
